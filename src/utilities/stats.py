@@ -33,7 +33,18 @@ def calculate_stats(output, target):
             target[:, k], output[:, k], average=None)
 
         # AUC
-        auc = metrics.roc_auc_score(target[:, k], output[:, k], average=None)
+        try:
+            auc = metrics.roc_auc_score(target[:, k], output[:, k], average=None)
+        except:
+            print('Error: AUC calculation failed, possibly due to insufficient number of positive samples.')
+            print(target[:, k])
+            print("........................")
+            print(output[:, k])
+            print("........................")
+            print(target)
+            print("........................")
+            print(output)
+            auc = 1
 
         # Precisions, recalls
         (precisions, recalls, thresholds) = metrics.precision_recall_curve(
