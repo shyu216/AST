@@ -1,13 +1,12 @@
 #!/bin/bash
-#SBATCH --job-name=DL
 #SBATCH --mail-user=shyu0@cse.cuhk.edu.hk
 #SBATCH --mail-type=ALL
 #SBATCH -p gpu_24h
-#SBATCH -x sls-titan-[0-2]
+##SBATCH -x sls-titan-[0-2]
 #SBATCH --gres=gpu:4
 #SBATCH -c 4
 #SBATCH -n 1
-#SBATCH --mem=48000
+##SBATCH --mem=48000
 #SBATCH --job-name="ast-esc50"
 #SBATCH --output=./log_%j.txt
 
