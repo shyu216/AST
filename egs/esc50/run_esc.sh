@@ -66,7 +66,6 @@ do
   tr_data=./data/datafiles/esc_train_data_${fold}.json
   te_data=./data/datafiles/esc_eval_data_${fold}.json
 
-  # -W ignore
   CUDA_CACHE_DISABLE=1 python ../../src/run.py -w 0 --model ${model} --dataset ${dataset} \
   --data-train ${tr_data} --data-val ${te_data} --exp-dir $exp_dir \
   --label-csv ./data/esc_class_labels_indices.csv --n_class 50 \
