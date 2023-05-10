@@ -55,15 +55,8 @@ def calculate_stats(output, target):
                     }
             stats.append(dict)
         except:
-            # print('Error: AUC calculation failed, possibly due to insufficient number of positive samples.')
-            # print(target[:, k])
-            # print("........................")
-            # print(output[:, k])
-            # print("........................")
-            # print(target)
-            # print("........................")
-            # print(output)
-            print("Error in class {}".format(k))
+            # print("eval set is too small and has no samples for class {}".format(k))
+            continue
             
 
     return stats
