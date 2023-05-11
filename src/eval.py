@@ -69,7 +69,7 @@ def evaluate(path):
     print(train_results.shape)
 
 if __name__ == '__main__':
-    evaluate('AST/egs/kaggle')
+    evaluate('AST/egs/kaggle/exp/ast-attempt7-acc-mean-std')
 
 
     
