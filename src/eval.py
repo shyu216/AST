@@ -5,6 +5,7 @@ import dataloader
 from torch.utils.data import WeightedRandomSampler
 import models
 from utilities import *
+import sklearn
 
 def evaluate(path):
     model_path = path + '/models/best_audio_model.pth'
@@ -58,17 +59,24 @@ def evaluate(path):
 
     # get prediction results
     train_results = []
+    train_labels = []
     for i, (audio_input, labels) in enumerate(train_loader):
         audio_input = audio_input.to(device)
+        train_labels.append(labels.cpu().numpy())
         labels = labels.to(device)
         with torch.no_grad():
             audio_output = audio_model(audio_input)
             # audio_output = torch.sigmoid(audio_output)
-            # print(audio_output.shape)
-            # print(audio_output)
+            print(audio_output.shape)
+            print(audio_output)
         train_results.append(audio_output.cpu().numpy())
     train_results = np.concatenate(train_results, axis=0)
+    train_labels = np.concatenate(train_labels, axis=0)
     print(train_results.shape)
+
+    train_auc = sklearn.metrics.roc_auc_score(train_labels.ravel(),train_results.ravel())
+    print('train auc: ', train_auc)
+    
 
 if __name__ == '__main__':
     evaluate('exp/ast-attempt7-acc-mean-std')
