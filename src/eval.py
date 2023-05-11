@@ -66,7 +66,7 @@ def evaluate(path):
         labels = labels.to(device)
         with torch.no_grad():
             audio_output = audio_model(audio_input)
-            # audio_output = torch.sigmoid(audio_output)
+            audio_output = torch.sigmoid(audio_output)
 
             print(audio_output.shape)
             print(audio_output)
