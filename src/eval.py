@@ -152,8 +152,26 @@ def evaluate(path):
 
         eval_auc = sklearn.metrics.roc_auc_score(eval_labels.ravel(),eval_results.ravel())
         print('eval auc: ', eval_auc)
+
+
+        # generate random predictions
+        random_results = np.random.rand(eval_results.shape[0], eval_results.shape[1])
+        sum = np.sum(random_results, axis=1)
+        random_results = random_results / sum[:, np.newaxis]
+        random_auc = sklearn.metrics.roc_auc_score(eval_labels.ravel(),random_results.ravel())
+        print('random auc: ', random_auc)
+
+        # generate uniform predictions
+        uniform_results = np.ones((eval_results.shape[0], eval_results.shape[1])) / eval_results.shape[1]
+        sum = np.sum(uniform_results, axis=1)
+        uniform_results = uniform_results / sum[:, np.newaxis]
+        uniform_auc = sklearn.metrics.roc_auc_score(eval_labels.ravel(),uniform_results.ravel())
+        print('uniform auc: ', uniform_auc)
+
     else:
         print('no evaluation data is provided')
+
+    
 
     
 
