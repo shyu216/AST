@@ -64,6 +64,8 @@ def evaluate(path):
         with torch.no_grad():
             audio_output = audio_model(audio_input)
             audio_output = torch.sigmoid(audio_output)
+            print(audio_output.shape)
+            print(audio_output)
         train_results.append(audio_output.cpu().numpy())
     train_results = np.concatenate(train_results, axis=0)
     print(train_results.shape)
